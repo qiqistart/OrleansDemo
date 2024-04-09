@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Orleans.Configuration;
 using Orleans.Hosting;
-using OrleansGrains.DemoGrains.DemoIGrains;
 using System.Net;
 
 
@@ -36,7 +35,7 @@ namespace Orleans.Silo
                     opt.ConnectionString = "Data Source=192.168.0.210;Database=orleans;AllowLoadLocalInfile=true;User ID=root;Password=root;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;";
                 })
                .ConfigureEndpoints(IPAddress.Parse("192.168.0.210"), 2020, 2021)
-                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHalloGrains).Assembly).WithReferences())
+                      //  .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHalloGrains).Assembly).WithReferences())
                  .UseDashboard(options => {
                      options.Username = "admin";
                      options.Password = "12345";

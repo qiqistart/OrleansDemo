@@ -12,8 +12,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OrleansGrains.DemoGrains\OrleansGrains.DemoGrains.csproj" />
-  </ItemGroup>
-
 </Project>

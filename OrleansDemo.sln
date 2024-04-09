@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Silo", "Orleans.Silo\Orleans.Silo.csproj", "{57303D30-0725-40DC-BC13-E1CDEB69CF5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Silo", "Orleans.Silo\Orleans.Silo.csproj", "{57303D30-0725-40DC-BC13-E1CDEB69CF5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Test", "Orleans.Test\Orleans.Test.csproj", "{EDBF839B-CF17-4034-A5FD-42ADB1099200}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{44D2E625-B58F-4E5F-942B-A31959AB7D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Repositories", "Orleans.Repositories\Orleans.Repositories.csproj", "{26D40651-E7C7-4FCF-9AE2-DF197B113B3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansDemo.Common", "OrleansDemo.Common\OrleansDemo.Common.csproj", "{CA269475-C62A-470C-9462-EA8A5139C78C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansGrains.DemoGrains", "OrleansGrains.DemoGrains\OrleansGrains.DemoGrains.csproj", "{9C4A5BC7-63C0-4A9F-B997-A702424FE677}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silo", "Silo", "{335D3655-C0E5-42AC-80C7-AF55A370533C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.API", "Test.API\Test.API.csproj", "{7F75904C-6EB4-4859-9E01-9141E47844C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grains", "Grains", "{4F5F0D67-E520-4D9E-8C87-557C49D254E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Grains", "Orleans.Grains\Orleans.Grains.csproj", "{6CAD3257-0589-4DC6-A6E3-175AC50368C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,25 +25,22 @@ Global
 		{57303D30-0725-40DC-BC13-E1CDEB69CF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57303D30-0725-40DC-BC13-E1CDEB69CF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57303D30-0725-40DC-BC13-E1CDEB69CF5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDBF839B-CF17-4034-A5FD-42ADB1099200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDBF839B-CF17-4034-A5FD-42ADB1099200}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDBF839B-CF17-4034-A5FD-42ADB1099200}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDBF839B-CF17-4034-A5FD-42ADB1099200}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26D40651-E7C7-4FCF-9AE2-DF197B113B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26D40651-E7C7-4FCF-9AE2-DF197B113B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26D40651-E7C7-4FCF-9AE2-DF197B113B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26D40651-E7C7-4FCF-9AE2-DF197B113B3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C4A5BC7-63C0-4A9F-B997-A702424FE677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C4A5BC7-63C0-4A9F-B997-A702424FE677}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C4A5BC7-63C0-4A9F-B997-A702424FE677}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C4A5BC7-63C0-4A9F-B997-A702424FE677}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F75904C-6EB4-4859-9E01-9141E47844C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F75904C-6EB4-4859-9E01-9141E47844C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F75904C-6EB4-4859-9E01-9141E47844C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F75904C-6EB4-4859-9E01-9141E47844C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA269475-C62A-470C-9462-EA8A5139C78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA269475-C62A-470C-9462-EA8A5139C78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA269475-C62A-470C-9462-EA8A5139C78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA269475-C62A-470C-9462-EA8A5139C78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAD3257-0589-4DC6-A6E3-175AC50368C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAD3257-0589-4DC6-A6E3-175AC50368C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAD3257-0589-4DC6-A6E3-175AC50368C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAD3257-0589-4DC6-A6E3-175AC50368C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57303D30-0725-40DC-BC13-E1CDEB69CF5A} = {335D3655-C0E5-42AC-80C7-AF55A370533C}
+		{CA269475-C62A-470C-9462-EA8A5139C78C} = {44D2E625-B58F-4E5F-942B-A31959AB7D99}
+		{6CAD3257-0589-4DC6-A6E3-175AC50368C1} = {4F5F0D67-E520-4D9E-8C87-557C49D254E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {003482C0-ADB6-4C69-9D22-360FE12A0DB4}

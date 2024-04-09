@@ -1,0 +1,4 @@
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton<ClusterClientHostedService>();
+builder.Services.AddSingleton<IHostedService>(_ => _.GetService<ClusterClientHostedService>());
+builder.Services.AddSingleton(_ => _.GetService<ClusterClientHostedService>().clusterClient);
