@@ -51,14 +51,14 @@ namespace Orleans.Silo
         {
             try
             {
-                Console.WriteLine("开始集群");
+                await Console.Out.WriteLineAsync("开始集群");
                 await Silo.StartAsync(cancellationToken);
-                Console.WriteLine("集群成功");
+                await Console.Out.WriteLineAsync("集群成功");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("集群失败"); ;
+                await Console.Out.WriteLineAsync(ex.Message);
+                await Console.Out.WriteLineAsync("集群失败"); 
             }
         }
 
@@ -67,14 +67,14 @@ namespace Orleans.Silo
             try
             {
 
-                Console.WriteLine("停止中");
+                await Console.Out.WriteLineAsync("停止中");
                 await Silo.StopAsync(cancellationToken);
-                Console.WriteLine("停止完成");
+                await Console.Out.WriteLineAsync("停止完成");
             }
             catch (Exception)
             {
 
-                Console.WriteLine("停止失败");
+                await Console.Out.WriteLineAsync("停止失败");
             }
         }
     }
