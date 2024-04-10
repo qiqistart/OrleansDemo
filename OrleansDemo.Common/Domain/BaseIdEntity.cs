@@ -3,10 +3,10 @@
 namespace OrleansDemo.Common.Domain;
 
 /// <summary>
-/// 泛型主键
+///领域实体
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public class BaseIdEntity<T> : BaseEntity
+/// <typeparam name="T"> 泛型主键</typeparam>
+public class BaseIdEntity<T> : BaseEntity, IAggregateRoot
 {
     /// <summary>
     /// 
