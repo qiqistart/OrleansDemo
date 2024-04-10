@@ -6,11 +6,11 @@ namespace OrleansDemo.Common.Domain;
 ///领域实体
 /// </summary>
 /// <typeparam name="T"> 泛型主键</typeparam>
-public class BaseIdEntity<T> : BaseEntity, IAggregateRoot
+public abstract class BaseIdEntity<T> : BaseEntity, IEntity<T>
 {
     /// <summary>
     /// 
     /// </summary>
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public T Id { get; set; }
+    public virtual T Id { get; set; }
 }

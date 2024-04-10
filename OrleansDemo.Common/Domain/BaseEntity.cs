@@ -1,17 +1,25 @@
-﻿namespace OrleansDemo.Common.Domain;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class BaseEntity
+namespace OrleansDemo.Common.Domain;
+
+/// <summary>
+/// 基类实体
+/// </summary>
+public abstract class BaseEntity:IEntity
 {
     /// <summary>
     /// 
     /// </summary>
-    public  StatusEnum Status { get; set; }
+    public StatusEnum Status { get; set; }
+
     /// <summary>
     /// 
     /// </summary>
-    public  DateTime Created { get; set; }
+    public DateTime Created { get; set; }
+
     /// <summary>
     /// 
     /// </summary>
-    public  DateTime? Updated { get; set; }
+    public DateTime? Updated { get; set; }
 }
+
