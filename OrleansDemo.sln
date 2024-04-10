@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Silo", "Orleans.Sil
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{44D2E625-B58F-4E5F-942B-A31959AB7D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansDemo.Common", "OrleansDemo.Common\OrleansDemo.Common.csproj", "{CA269475-C62A-470C-9462-EA8A5139C78C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansDemo.Common", "OrleansDemo.Common\OrleansDemo.Common.csproj", "{CA269475-C62A-470C-9462-EA8A5139C78C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silo", "Silo", "{335D3655-C0E5-42AC-80C7-AF55A370533C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grains", "Grains", "{4F5F0D67-E520-4D9E-8C87-557C49D254E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Grains", "Orleans.Grains\Orleans.Grains.csproj", "{6CAD3257-0589-4DC6-A6E3-175AC50368C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Grains", "Orleans.Grains\Orleans.Grains.csproj", "{6CAD3257-0589-4DC6-A6E3-175AC50368C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servces", "Servces", "{9A5C7FF0-CA9F-4732-86FD-9F5DA828ACAA}"
 EndProject
@@ -21,13 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2E3A8946-52B3-4838-8566-9FF9A881335D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Domain", "Orleans.Domain\Orleans.Domain.csproj", "{D69FAD26-1842-4DBE-A5FE-9E918CFCA582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Domain", "Orleans.Domain\Orleans.Domain.csproj", "{D69FAD26-1842-4DBE-A5FE-9E918CFCA582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.WebAPI", "Orleans.WebAPI\Orleans.WebAPI.csproj", "{781039FC-F9DF-411E-91EB-E9F47D0FD511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.WebAPI", "Orleans.WebAPI\Orleans.WebAPI.csproj", "{781039FC-F9DF-411E-91EB-E9F47D0FD511}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F3E61D52-B543-4797-80A0-2FCB2BD25477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Infrastructure", "Orleans.Infrastructure\Orleans.Infrastructure.csproj", "{57637042-BD9A-4218-97AE-4C170B123410}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.Infrastructure", "Orleans.Infrastructure\Orleans.Infrastructure.csproj", "{57637042-BD9A-4218-97AE-4C170B123410}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Application", "Orleans.Application\Orleans.Application.csproj", "{633BBD87-639F-46EE-9BB3-FA288CB1505D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{57637042-BD9A-4218-97AE-4C170B123410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57637042-BD9A-4218-97AE-4C170B123410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57637042-BD9A-4218-97AE-4C170B123410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633BBD87-639F-46EE-9BB3-FA288CB1505D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633BBD87-639F-46EE-9BB3-FA288CB1505D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633BBD87-639F-46EE-9BB3-FA288CB1505D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633BBD87-639F-46EE-9BB3-FA288CB1505D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{D69FAD26-1842-4DBE-A5FE-9E918CFCA582} = {2E3A8946-52B3-4838-8566-9FF9A881335D}
 		{781039FC-F9DF-411E-91EB-E9F47D0FD511} = {9A5C7FF0-CA9F-4732-86FD-9F5DA828ACAA}
 		{57637042-BD9A-4218-97AE-4C170B123410} = {F3E61D52-B543-4797-80A0-2FCB2BD25477}
+		{633BBD87-639F-46EE-9BB3-FA288CB1505D} = {23BEFDAB-99AC-4459-8676-3BEEDD575547}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {003482C0-ADB6-4C69-9D22-360FE12A0DB4}
