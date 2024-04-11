@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
+using Orleans.Grains.User;
 using Orleans.Hosting;
 using Orleans.Silo.Configuration;
 using System.Net;
@@ -38,7 +39,7 @@ public class SiloHostService : IHostedService
                 opt.ConnectionString = AppSetting.Clustering.ConnectionString;
             })
            .ConfigureEndpoints(IPAddress.Parse(AppSetting.IPAddress.ipString), AppSetting.IPAddress.siloPort, AppSetting.IPAddress.gatewayPort)
-             //  .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHalloGrains).Assembly).WithReferences())
+              .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IUserGrains).Assembly).WithReferences())
              .UseDashboard(options =>
              {
                  options.Username = "admin";
