@@ -34,11 +34,11 @@ public class SiloHostService : IHostedService
            .Configure<ClusterMembershipOptions>(option =>
             option.UseLivenessGossip = true
             )
-           .AddAdoNetGrainStorage("OrleansStorage", options =>
+           .AddAdoNetGrainStorage(AppSetting.GrainStorage.Name, options =>
            {
-               options.Invariant = "<Invariant>";
-               options.ConnectionString = "<ConnectionString>";
-               options.UseJsonFormat = true;
+               options.Invariant = AppSetting.GrainStorage.Invariant;
+               options.ConnectionString = AppSetting.GrainStorage.ConnectionString;
+               options.UseJsonFormat = AppSetting.GrainStorage.UseJsonFormat;
 
            })
            .UseAdoNetClustering(opt =>
