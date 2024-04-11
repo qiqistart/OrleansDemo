@@ -1,4 +1,3 @@
-using Orleans.Infrastructure;
 using OrleansDemo.Common;
 
 var builder = WebApplication.CreateBuilder(args);
