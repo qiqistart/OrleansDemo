@@ -35,5 +35,11 @@ public static class AppSetting
     /// 
     /// </summary>
     public static Orleans.Silo.Configuration.ConfigModel.Clustering Clustering => _cfg.GetSection(nameof(Clustering)).Get<Orleans.Silo.Configuration.ConfigModel.Clustering>();
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static GrainStorage GrainStorage => _cfg.GetSection(nameof(GrainStorage)).Get<GrainStorage>();
 }
 

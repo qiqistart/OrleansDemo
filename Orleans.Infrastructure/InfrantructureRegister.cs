@@ -16,7 +16,7 @@ public static class InfrantructureRegister
     /// <param name="service"></param>
     /// <param name="configuration"></param>
     /// <returns></returns>
-    public static IServiceCollection addInfrantructure(this IServiceCollection service, IConfiguration configuration)
+    public static IServiceCollection AddInfrantructure(this IServiceCollection service, IConfiguration configuration)
     {
         service.AddDbContext<OrleansDbContext>(opt =>
             {

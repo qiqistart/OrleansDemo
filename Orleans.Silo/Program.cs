@@ -16,5 +16,5 @@ await new HostBuilder()
        services.AddSingleton<SiloHostService>();
        services.AddSingleton<IHostedService>(_ => _.GetService<SiloHostService>());
        services.AddSingleton(_ => _.GetService<SiloHostService>().Silo);
-       services.addInfrantructure(AppSetting._cfg);
+       services.AddInfrantructure(AppSetting._cfg);
    }).RunConsoleAsync();

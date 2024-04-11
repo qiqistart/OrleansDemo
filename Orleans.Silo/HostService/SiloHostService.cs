@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Grains.User;
@@ -33,6 +34,13 @@ public class SiloHostService : IHostedService
            .Configure<ClusterMembershipOptions>(option =>
             option.UseLivenessGossip = true
             )
+           .AddAdoNetGrainStorage("OrleansStorage", options =>
+           {
+               options.Invariant = "<Invariant>";
+               options.ConnectionString = "<ConnectionString>";
+               options.UseJsonFormat = true;
+
+           })
            .UseAdoNetClustering(opt =>
             {
                 opt.Invariant = AppSetting.Clustering.Invariant;
