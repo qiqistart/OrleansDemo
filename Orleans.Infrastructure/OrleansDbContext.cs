@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Orleans.Domain.Entity;
+using Orleans.Domain.Entity.UserAggregate;
 
 namespace Orleans.Infrastructure;
 

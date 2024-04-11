@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Orleans.Domain.Entity;
+namespace Orleans.Domain.Entity.UserAggregate;
 public class SysUser : BaseIdEntity<string>, IAggregateRoot
 {
     /// <summary>

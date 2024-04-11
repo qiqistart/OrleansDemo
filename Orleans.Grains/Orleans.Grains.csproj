@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Orleans.Infrastructure\Orleans.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="User\" />
+  </ItemGroup>
+
 </Project>

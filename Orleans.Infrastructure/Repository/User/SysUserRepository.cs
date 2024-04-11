@@ -1,4 +1,4 @@
-﻿using Orleans.Domain.Entity;
+﻿using Orleans.Domain.Entity.UserAggregate;
 using OrleansDemo.Common.Infrastructure;
 
 
