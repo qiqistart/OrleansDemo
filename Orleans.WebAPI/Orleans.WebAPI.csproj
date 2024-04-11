@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Orleans.Grains\Orleans.Grains.csproj" />
       <ProjectReference Include="..\OrleansDemo.Common\OrleansDemo.Common.csproj" />
     </ItemGroup>
 

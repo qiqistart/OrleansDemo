@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
+using OrleansDemo.Common.CommconConfig;
 using System.Net;
+
 
 namespace OrleansDemo.Common;
 
@@ -13,27 +16,45 @@ public class ClusterClientHostedService : IHostedService
 {
     public IClusterClient clusterClient { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private IConfiguration _cfg;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<ClusterClientHostedService> _logger;
-    public ClusterClientHostedService(ILogger<ClusterClientHostedService> _logger)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_logger"></param>
+    /// <param name="_cfg"></param>
+    public ClusterClientHostedService(ILogger<ClusterClientHostedService> _logger, IConfiguration _cfg)
     {
 
         this._logger = _logger;
-        IPEndPoint[] iPEndPoints = new IPEndPoint[1];
-        iPEndPoints[0] = new IPEndPoint(IPAddress.Parse("192.168.0.105"), 2021);
-
-        // Console.WriteLine("11");
-        // iPEndPoints[] = new IPEndPoint(IPAddress.Parse(""), 1000);
+        this._cfg = _cfg;
+        var SiloIpConfig = _cfg.GetSection("SiloIpConfig").Get<List<SiloIpConfig>>();
+        List<IPEndPoint> iPEndPoints = new List<IPEndPoint>();
+        foreach (var item in SiloIpConfig)
+        {
+            iPEndPoints.Add(new IPEndPoint(System.Net.IPAddress.Parse(item.ipString), item.gatewayPort));
+        }
+        var ClusterConfig = _cfg.GetSection("ClusterConfig").Get<ClusterConfig>();
         clusterClient = new ClientBuilder()
-           .UseStaticClustering(iPEndPoints)
+           .UseStaticClustering(iPEndPoints.ToArray())
            .Configure<ClusterOptions>(options =>
            {
-               options.ClusterId = "Orleans";
-               options.ServiceId = "Orleans";
+               options.ClusterId = ClusterConfig.ClusterId;
+               options.ServiceId = ClusterConfig.ServiceId;
            })
-           //.ConfigureLogging(builder => builder.AddProvider(loggerProvider))
            .Build();
-
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public Task StartAsync(CancellationToken cancellationToken)
     {
         var attempt = 0;
@@ -73,7 +94,11 @@ public class ClusterClientHostedService : IHostedService
         });
 
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         try

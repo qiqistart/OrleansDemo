@@ -1,14 +1,11 @@
-using OrleansDemo.Common;
+using OrleansDemo.Common.ClusterClient;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSingleton<ClusterClientHostedService>();
-builder.Services.AddSingleton<IHostedService>(_ => _.GetService<ClusterClientHostedService>());
-builder.Services.AddSingleton(_ => _.GetService<ClusterClientHostedService>().clusterClient);
-
+builder.Services.AddClusterClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

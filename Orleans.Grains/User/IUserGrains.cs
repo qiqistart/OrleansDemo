@@ -2,4 +2,6 @@
 
 public interface IUserGrains : IGrainWithStringKey
 {
+
+    Task SayHalo();
 }
