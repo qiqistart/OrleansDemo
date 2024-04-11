@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Orleans.Domain\Orleans.Domain.csproj" />
+      <ProjectReference Include="..\OrleansDemo.Common\OrleansDemo.Common.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -12,6 +12,7 @@
     <Folder Include="Dto\ResponseDto\" />
     <Folder Include="Queries\" />
     <Folder Include="Mapper\" />
+    <Folder Include="CommandHandler\" />
   </ItemGroup>
 
 </Project>

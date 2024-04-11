@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Orleans.Domain.Entity;
-public class SysUser : BaseIdEntity<string>
+public class SysUser : BaseIdEntity<string>, IAggregateRoot
 {
     /// <summary>
     /// 
