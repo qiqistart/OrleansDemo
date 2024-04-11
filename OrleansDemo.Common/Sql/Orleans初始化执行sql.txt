@@ -1,4 +1,3 @@
-//À≥–Ú÷¥––sql
 
 
 CREATE TABLE OrleansQuery
