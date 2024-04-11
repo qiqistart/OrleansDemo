@@ -7,8 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entity\" />
       <Folder Include="Enum\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OrleansDemo.Common\OrleansDemo.Common.csproj" />
     </ItemGroup>
 
 </Project>

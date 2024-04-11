@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Command\" />
+    <Folder Include="Dto\RequestDto\" />
+    <Folder Include="Dto\ResponseDto\" />
     <Folder Include="Queries\" />
+    <Folder Include="Mapper\" />
   </ItemGroup>
 
 </Project>
