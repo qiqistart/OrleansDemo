@@ -2,12 +2,19 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Orleans.Silo;
+using Orleans.Silo.Configuration;
+using Orleans.Silo.HostService;
+using System.Configuration;
 
 await new HostBuilder()
+    .ConfigureAppConfiguration(config => { 
+    
+      
+    })
     .ConfigureHostConfiguration(config =>
     {
-        config.AddJsonFile("siloconfig.json");
+        config.AddJsonFile("ConfigJson/siloconfig.json");
+        AppSetting._cfg = config.Build();
     })
    .ConfigureServices(services =>
    {

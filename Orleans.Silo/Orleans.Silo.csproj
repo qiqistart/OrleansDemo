@@ -17,7 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="siloconfig.json">
+    <ProjectReference Include="..\OrleansDemo.Common\OrleansDemo.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfigJson\siloconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
