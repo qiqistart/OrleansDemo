@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Orleans.Configuration;
 using Orleans.Hosting;
@@ -12,11 +13,13 @@ namespace Orleans.Silo
         public ILogger<SiloHostService> logger;
         public ISiloHost Silo { get; }
 
+        private readonly IConfiguration cfg;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="logger"></param>
-        public SiloHostService(ILogger<SiloHostService> logger)
+        /// <param name="cfg"></param>
+        public SiloHostService(ILogger<SiloHostService> logger, IConfiguration cfg)
         {
             this.logger = logger;
             Silo = new SiloHostBuilder()
@@ -32,11 +35,12 @@ namespace Orleans.Silo
                .UseAdoNetClustering(opt =>
                 {
                     opt.Invariant = "MySql.Data.MySqlClient";
-                    opt.ConnectionString = "Data Source=192.168.0.210;Database=orleans;AllowLoadLocalInfile=true;User ID=root;Password=root;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;";
+                    opt.ConnectionString = "Data Source=192.168.0.105;Database=OrleansDemo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;";
                 })
-               .ConfigureEndpoints(IPAddress.Parse("192.168.0.210"), 2020, 2021)
-                      //  .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHalloGrains).Assembly).WithReferences())
-                 .UseDashboard(options => {
+               .ConfigureEndpoints(IPAddress.Parse("192.168.0.105"), 2020, 2021)
+                 //  .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IHalloGrains).Assembly).WithReferences())
+                 .UseDashboard(options =>
+                 {
                      options.Username = "admin";
                      options.Password = "12345";
                      options.Host = "*";
@@ -58,7 +62,7 @@ namespace Orleans.Silo
             catch (Exception ex)
             {
                 await Console.Out.WriteLineAsync(ex.Message);
-                await Console.Out.WriteLineAsync("集群失败"); 
+                await Console.Out.WriteLineAsync("集群失败");
             }
         }
 

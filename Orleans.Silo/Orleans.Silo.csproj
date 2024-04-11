@@ -16,4 +16,10 @@
     <PackageReference Include="OrleansDashboard" Version="3.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="siloconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

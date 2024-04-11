@@ -19,7 +19,7 @@ public class ClusterClientHostedService : IHostedService
 
         this._logger = _logger;
         IPEndPoint[] iPEndPoints = new IPEndPoint[1];
-        iPEndPoints[0] = new IPEndPoint(IPAddress.Parse("192.168.0.210"), 2020);
+        iPEndPoints[0] = new IPEndPoint(IPAddress.Parse("192.168.0.105"), 2021);
 
         // Console.WriteLine("11");
         // iPEndPoints[] = new IPEndPoint(IPAddress.Parse(""), 1000);
