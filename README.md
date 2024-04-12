@@ -1,2 +1,3 @@
 orleans framework learning warehouse, initialize orleans。Architecture diagram:
-![image](https://github.com/qiqistart/OrleansDemo/assets/51347469/7678ae90-4ab8-4bcd-bac9-ab6adf696794)
+![image](https://github.com/qiqistart/OrleansDemo/assets/51347469/d8eeb605-496b-4991-bcc1-ee80db5dd067)
+
