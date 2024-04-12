@@ -22,7 +22,7 @@ builder.Services.AddAuthentication("Bearer")
     options.ApiSecret =builder.Configuration.GetValue<string>("IdentityConfig:ApiSecret");
 });
 
-//builder.Services.AddClusterClient();
+builder.Services.AddClusterClient();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
