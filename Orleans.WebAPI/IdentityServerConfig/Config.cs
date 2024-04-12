@@ -23,7 +23,8 @@ public static class Config
                     },
                     AllowOfflineAccess = true,
                     AccessTokenLifetime = 3600 * 24 * 30,
-                    SlidingRefreshTokenLifetime = 3600 * 24 * 60
+                    SlidingRefreshTokenLifetime = 3600 * 24 * 60,
+                   
                 },
             };
 

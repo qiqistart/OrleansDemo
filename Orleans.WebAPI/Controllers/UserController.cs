@@ -1,7 +1,9 @@
 ﻿using IdentityModel.Client;
 using IdentityServer4;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Orleans.Application.Dto.RequestDto.User;
 using OrleansDemo.Common.ApiResultModel;
 using Ubiety.Dns.Core;
@@ -16,10 +18,11 @@ namespace Orleans.WebAPI.Controllers;
 [Authorize]
 public class UserController : ControllerBase
 {
+    private readonly IConfiguration _cfg;
 
-    public UserController()
+    public UserController(IConfiguration _cfg)
     {
-
+        this._cfg = _cfg;
     }
 
 
@@ -33,13 +36,13 @@ public class UserController : ControllerBase
     public async Task<ApiResult> LoginAsync([FromBody] LoginDto loginDto)
     {
 
-        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri("https://localhost:7085/connect/token") },
+        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri($"{_cfg.GetValue<string>("IdentityConfig:Authority")}{_cfg.GetValue<string>("IdentityConfig:GetTokenUrl")}") },
         new TokenClientOptions
         {
-            ClientId = "Admin",
-            ClientSecret = "secret"
+            ClientId = _cfg.GetValue<string>("IdentityConfig:ClientId"),
+            ClientSecret = _cfg.GetValue<string>("IdentityConfig:ClientSecret")
         });
-        var granType = "SystemUser";
+        var granType = _cfg.GetValue<string>("IdentityConfig:GranType");
         IDictionary<string, string> parameters = new Dictionary<string, string>()
         {
             { "userId","1"}
@@ -62,13 +65,13 @@ public class UserController : ControllerBase
     [AllowAnonymous]
     public async Task<ApiResult> UserRefreshTokenAsync([FromBody] RefreshTokenDto refreshTokenDto)
     {
-        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri("https://localhost:7085/connect/token") },
+        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri($"{_cfg.GetValue<string>("IdentityConfig:Authority")}{_cfg.GetValue<string>("IdentityConfig:GetTokenUrl")}") },
      new TokenClientOptions
      {
-         ClientId = "Admin",
-         ClientSecret = "secret"
+         ClientId = _cfg.GetValue<string>("IdentityConfig:ClientId"),
+         ClientSecret = _cfg.GetValue<string>("IdentityConfig:ClientSecret")
      });
-        var granType = "SystemUser";
+        var granType = _cfg.GetValue<string>("IdentityConfig:GranType");
         IDictionary<string, string> parameters = new Dictionary<string, string>()
         {
             { IdentityServerConstants.PersistedGrantTypes.RefreshToken,refreshTokenDto.RefreshToken},
@@ -87,21 +90,27 @@ public class UserController : ControllerBase
         return ApiResult.OkMsg("刷新成功");
     }
     /// <summary>
-    /// 
+    /// todo
     /// </summary>
     /// <returns></returns>
     [HttpPost("Logout")]
     public async Task<ApiResult> LogoutAsync()
     {
-        var token = HttpContext.Request.Headers["ID-Revoke-Key"];
+        var token = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
         if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
         HttpClient client = new HttpClient();
+        IDictionary<string, string> parameters = new Dictionary<string, string>()
+        {
+            {"granType", "SystemUser"}
+        };
         var response = await client.RevokeTokenAsync(new TokenRevocationRequest
         {
-            Address = "https://localhost:7085",
+            Address = "http://localhost:7085/connect/revocation",
             ClientId = "Admin",
             ClientSecret = "secret",
-            Token = token!
+            Parameters = parameters,
+            Token = token,
+            TokenTypeHint = "access_token"
         });
         if (response.IsError)
         {
