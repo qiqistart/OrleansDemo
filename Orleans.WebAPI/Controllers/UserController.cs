@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using IdentityModel.Client;
+using IdentityServer4;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Orleans.Grains.User;
+using Orleans.Application.Dto.RequestDto.User;
+using OrleansDemo.Common.ApiResultModel;
+using Ubiety.Dns.Core;
 
 namespace Orleans.WebAPI.Controllers;
 
@@ -13,18 +16,120 @@ namespace Orleans.WebAPI.Controllers;
 [Authorize]
 public class UserController : ControllerBase
 {
-    private readonly IClusterClient _client;
-    public UserController(IClusterClient _client)
+
+    public UserController()
     {
-        this._client = _client;
+
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="loginDto"></param>
+    /// <returns></returns>
+    [HttpPost("Login")]
     [AllowAnonymous]
-    [HttpPost]
+    public async Task<ApiResult> LoginAsync([FromBody] LoginDto loginDto)
+    {
+
+        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri("https://localhost:7085/connect/token") },
+        new TokenClientOptions
+        {
+            ClientId = "Admin",
+            ClientSecret = "secret"
+        });
+        var granType = "SystemUser";
+        IDictionary<string, string> parameters = new Dictionary<string, string>()
+        {
+            { "userId","1"}
+        };
+        var response = await tokenClient.RequestTokenAsync(granType, parameters);
+        if (response == null)
+        {
+            throw new UnauthorizedAccessException();
+        }
+        SetResponseHeaderToken(response.AccessToken!, response.RefreshToken!);
+
+        return ApiResult.OkMsg("登录成功");
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="refreshTokenDto"></param>
+    /// <returns></returns>
+    [HttpPost("UserRefreshToken")]
+    [AllowAnonymous]
+    public async Task<ApiResult> UserRefreshTokenAsync([FromBody] RefreshTokenDto refreshTokenDto)
+    {
+        var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri("https://localhost:7085/connect/token") },
+     new TokenClientOptions
+     {
+         ClientId = "Admin",
+         ClientSecret = "secret"
+     });
+        var granType = "SystemUser";
+        IDictionary<string, string> parameters = new Dictionary<string, string>()
+        {
+            { IdentityServerConstants.PersistedGrantTypes.RefreshToken,refreshTokenDto.RefreshToken},
+            {"granType", granType}
+        };
+        var response = await tokenClient.RequestRefreshTokenAsync(refreshTokenDto.RefreshToken);
+        if (response == null)
+        {
+            throw new UnauthorizedAccessException();
+        }
+        if (response.IsError)
+        {
+            throw new Exception("无效的refresh_token");
+        }
+        SetResponseHeaderToken(response.AccessToken!, response.RefreshToken!);
+        return ApiResult.OkMsg("刷新成功");
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("Logout")]
+    public async Task<ApiResult> LogoutAsync()
+    {
+        var token = HttpContext.Request.Headers["ID-Revoke-Key"];
+        if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
+        HttpClient client = new HttpClient();
+        var response = await client.RevokeTokenAsync(new TokenRevocationRequest
+        {
+            Address = "https://localhost:7085",
+            ClientId = "Admin",
+            ClientSecret = "secret",
+            Token = token!
+        });
+        if (response.IsError)
+        {
+            throw new Exception("退出失败!");
+        }
+        return ApiResult.OkMsg("退出成功");
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("Test")]
     public async Task Test()
     {
-         await _client.GetGrain<IUserGrains>(Guid.NewGuid().ToString()).SayHalo();
+        await Console.Out.WriteLineAsync("111");
     }
+    #region
+    /// <summary>
+    /// 设置http返回头
+    /// </summary>
+    /// <param name="accessToken"></param>
+    /// <param name="refreshToken"></param>
+    private void SetResponseHeaderToken(string accessToken, string refreshToken)
+    {
+        HttpContext.Response.Headers.Add("access-token", accessToken);
+        HttpContext.Response.Headers.Add("x-access-token", refreshToken);
+    }
+    #endregion
 
 
 

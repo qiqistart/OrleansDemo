@@ -1,13 +1,29 @@
+using Microsoft.Extensions.DependencyInjection;
+using Orleans.WebAPI.Identity;
+using Orleans.WebAPI.IdentityServerConfig;
 using OrleansDemo.Common.ClusterClient;
+using Ubiety.Dns.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddClusterClient();
-var app = builder.Build();
+builder.Services.AddIdentityServer()
+   .AddDeveloperSigningCredential()
+     .AddInMemoryClients(Config.GetClients())
+    .AddInMemoryApiScopes(Config.GetApiScopes())
+    .AddInMemoryApiScopes(Config.GetApiScopes())
+    .AddExtensionGrantValidator<SystemUserGrantValidator>();
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
 
+    options.Authority = "https://localhost:7085";
+    options.RequireHttpsMetadata = false;
+    options.Audience = "AdminAPI";
+});
+
+//builder.Services.AddClusterClient();
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -17,6 +33,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseIdentityServer();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -8,11 +8,12 @@
 
     <ItemGroup>
         <PackageReference Include="IdentityServer4" Version="4.1.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Orleans.Grains\Orleans.Grains.csproj" />
+      <ProjectReference Include="..\Orleans.Application\Orleans.Application.csproj" />
       <ProjectReference Include="..\OrleansDemo.Common\OrleansDemo.Common.csproj" />
     </ItemGroup>
 
