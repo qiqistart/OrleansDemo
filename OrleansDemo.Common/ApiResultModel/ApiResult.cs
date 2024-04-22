@@ -51,10 +51,6 @@ public class ApiResult
         return new ApiResult<T>(default, -1, msg);
     }
 
-    public static ApiResult<T> Fail<T>(string msg, T data)
-    {
-        return new ApiResult<T>(data, -1, msg);
-    }
 
     public static PageResult<T> OkPage<T>(List<T>? data, PagerModel pager)
     {

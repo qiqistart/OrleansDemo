@@ -20,7 +20,7 @@ public static class InfrantructureRegister
     {
         service.AddDbContext<OrleansDbContext>(opt =>
             {
-                opt.UseMySQL(configuration.GetConnectionString("AdminConnectionStrings"));
+                opt.UseMySQL(configuration.GetConnectionString("DbConnectionString"));
             }
         );
         service.AddScoped<ISysUserRepository, SysUserRepository>();

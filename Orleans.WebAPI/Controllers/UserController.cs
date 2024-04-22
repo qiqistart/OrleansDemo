@@ -1,5 +1,6 @@
 ﻿using IdentityModel.Client;
 using IdentityServer4;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,24 @@ namespace Orleans.WebAPI.Controllers;
 [Authorize]
 public class UserController : ControllerBase
 {
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IConfiguration _cfg;
 
-    public UserController(IConfiguration _cfg)
+    /// <summary>
+    /// 
+    /// </summary>
+    private readonly IMediator _mediator;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_cfg"></param>
+    /// <param name="_mediator"></param>
+    public UserController(IConfiguration _cfg, IMediator _mediator)
     {
         this._cfg = _cfg;
+        this._mediator = _mediator;
     }
 
 
@@ -36,6 +50,7 @@ public class UserController : ControllerBase
     public async Task<ApiResult> LoginAsync([FromBody] LoginDto loginDto)
     {
 
+        #region 登录调用id4
         var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri($"{_cfg.GetValue<string>("IdentityConfig:Authority")}{_cfg.GetValue<string>("IdentityConfig:GetTokenUrl")}") },
         new TokenClientOptions
         {
@@ -53,6 +68,7 @@ public class UserController : ControllerBase
             throw new UnauthorizedAccessException();
         }
         SetResponseHeaderToken(response.AccessToken!, response.RefreshToken!);
+        #endregion
 
         return ApiResult.OkMsg("登录成功");
     }

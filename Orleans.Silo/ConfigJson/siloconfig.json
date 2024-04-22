@@ -1,7 +1,6 @@
 {
   "ConnectionString": {
-
-
+    "DbConnectionString": "Data Source=192.168.0.105;Database=Demo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;"
   },
   "IPAddress": {
     "ipString": "192.168.0.105",
@@ -11,10 +10,6 @@
   "ClusterConfig": {
     "ClusterId": "Orleans",
     "ServiceId": "Orleans"
-  },
-  "Clustering": {
-    "ConnectionString": "Data Source=192.168.0.105;Database=OrleansDemo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;",
-    "Invariant": "MySql.Data.MySqlClient"
   },
   "GrainStorage": {
     "Name": "OrleansStorage",

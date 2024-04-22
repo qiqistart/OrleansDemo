@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Orleans.Grains.User;
+namespace Orleans.Application.Queries.User;
 
-public class UserGrains : Grain, IUserGrains
+public interface IUserQueries
 {
 }
-
