@@ -3,6 +3,12 @@ using OrleansDemo.Common.Infrastructure;
 
 namespace Orleans.Infrastructure.Repository.User;
 
-public interface ISysUserRepository: IRepository<SysUser,string>
+public interface ISysUserRepository : IRepository<SysUser, string>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    Task<SysUser> GetUserByAccount(string Account);
 }

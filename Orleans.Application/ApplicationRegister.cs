@@ -7,11 +7,11 @@ namespace Orleans.Application;
 public static class ApplicationRegister
 {
     /// <summary>
-    /// 
+    ///                         
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection addApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
         return services;

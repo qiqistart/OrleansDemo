@@ -1,7 +1,7 @@
-using Microsoft.Extensions.DependencyInjection;
 using Orleans.WebAPI.Identity;
 using Orleans.WebAPI.IdentityServerConfig;
 using OrleansDemo.Common.ClusterClient;
+using Orleans.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -23,6 +23,7 @@ builder.Services.AddAuthentication("Bearer")
 });
 
 builder.Services.AddClusterClient();
+builder.Services.AddApplication();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Orleans.Application.Dto.RequestDto.User;
+using Orleans.Application.Queries.User;
 using OrleansDemo.Common.ApiResultModel;
-using Ubiety.Dns.Core;
-
+using OrleansDemo.Common.ErorrException;
+using OrleansDemo.Common.MD5;
 namespace Orleans.WebAPI.Controllers;
 
 /// <summary>
@@ -41,7 +42,7 @@ public class UserController : ControllerBase
 
 
     /// <summary>
-    /// 
+    ///   登录
     /// </summary>
     /// <param name="loginDto"></param>
     /// <returns></returns>
@@ -49,7 +50,20 @@ public class UserController : ControllerBase
     [AllowAnonymous]
     public async Task<ApiResult> LoginAsync([FromBody] LoginDto loginDto)
     {
-
+        var userData = await _mediator
+                   .Send(new GetUserByAccountQueries(loginDto.Account));
+        if (userData == null)
+        {
+            throw new HintException("用户不存在!");
+        }
+        if (userData.PassWord != MD5Helper.MD5Hash(loginDto.PassWord))
+        {
+            throw new HintException("密码错误!");
+        }
+        if (userData.IsEnable == false)
+        {
+            throw new HintException("用户已被禁用!");
+        }
         #region 登录调用id4
         var tokenClient = new TokenClient(new HttpClient { BaseAddress = new Uri($"{_cfg.GetValue<string>("IdentityConfig:Authority")}{_cfg.GetValue<string>("IdentityConfig:GetTokenUrl")}") },
         new TokenClientOptions
@@ -60,7 +74,7 @@ public class UserController : ControllerBase
         var granType = _cfg.GetValue<string>("IdentityConfig:GranType");
         IDictionary<string, string> parameters = new Dictionary<string, string>()
         {
-            { "userId","1"}
+            { "userId",$"{userData.Id}" }
         };
         var response = await tokenClient.RequestTokenAsync(granType, parameters);
         if (response == null)

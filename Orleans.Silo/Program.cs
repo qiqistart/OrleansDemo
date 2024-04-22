@@ -11,10 +11,10 @@ await new HostBuilder()
         config.AddJsonFile("ConfigJson/siloconfig.json");
         AppSetting._cfg = config.Build();
     })
-   .ConfigureServices(services =>
+   .ConfigureServices((hostbuilderContext,services) =>
    {
+       services.AddInfrantructure(AppSetting._cfg);
        services.AddSingleton<SiloHostService>();
        services.AddSingleton<IHostedService>(_ => _.GetService<SiloHostService>());
        services.AddSingleton(_ => _.GetService<SiloHostService>().Silo);
-       services.AddInfrantructure(AppSetting._cfg);
    }).RunConsoleAsync();

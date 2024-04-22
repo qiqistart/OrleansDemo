@@ -9,11 +9,18 @@ namespace Orleans.Domain.Entity.UserAggregate;
 public class SysUser : BaseIdEntity<string>, IAggregateRoot
 {
     /// <summary>
-    /// 
+    ///             
+    /// </summary>
+    public SysUser()
+    {
+
+    }
+    /// <summary>
+    ///     
     /// </summary>
     public string UserName { get; set; }
     /// <summary>
-    /// 
+    ///     
     /// </summary>
     public string Account { get; set; }
 
@@ -26,5 +33,9 @@ public class SysUser : BaseIdEntity<string>, IAggregateRoot
     /// 
     /// </summary>
     public string PassWord { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsEnable { get; set; }
 
 }

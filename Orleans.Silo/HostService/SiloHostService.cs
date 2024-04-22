@@ -5,6 +5,7 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Grains.User;
 using Orleans.Hosting;
+using Orleans.Infrastructure.Repository.User;
 using Orleans.Silo.Configuration;
 using System.Net;
 
@@ -15,13 +16,15 @@ public class SiloHostService : IHostedService
 {
     public ILogger<SiloHostService> logger;
     public ISiloHost Silo { get; }
+
+    private ISysUserRepository sysUserRepository;
     /// <summary>
-    /// 
+    ///             
     /// </summary>
     /// <param name="logger"></param>
-    /// <param name="cfg"></param>
-    public SiloHostService(ILogger<SiloHostService> logger)
+    public SiloHostService(ILogger<SiloHostService> logger, ISysUserRepository sysUserRepository)
     {
+        this.sysUserRepository = sysUserRepository;
         this.logger = logger;
         Silo = new SiloHostBuilder()
            .Configure<ClusterOptions>(option =>
@@ -43,8 +46,8 @@ public class SiloHostService : IHostedService
            })
            .UseAdoNetClustering(opt =>
             {
-                opt.Invariant = AppSetting.Clustering.Invariant;
-                opt.ConnectionString = AppSetting.Clustering.ConnectionString;
+                opt.Invariant = AppSetting.GrainStorage.Invariant;
+                opt.ConnectionString = AppSetting.GrainStorage.ConnectionString;
             })
            .ConfigureEndpoints(IPAddress.Parse(AppSetting.IPAddress.ipString), AppSetting.IPAddress.siloPort, AppSetting.IPAddress.gatewayPort)
               .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IUserGrains).Assembly).WithReferences())
