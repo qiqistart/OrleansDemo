@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Orleans.Grains.User.GrainState
-{
-    public class UserGrainState
-    {
-        /// <summary>
-        /// 
-        /// </summary>
+namespace Orleans.Grains.User.GrainState;
 
-        public SysUser SysUser { get; set; }
-    }
+[Serializable]
+public class UserGrainState
+{
+    /// <summary>
+    /// 
+    /// </summary>
+
+    public SysUser SysUser { get; set; }
 }

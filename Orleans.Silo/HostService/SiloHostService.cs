@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Grains.User;
 using Orleans.Hosting;
+using Orleans.Infrastructure;
 using Orleans.Infrastructure.Repository.User;
 using Orleans.Silo.Configuration;
 using System.Net;
@@ -17,14 +17,13 @@ public class SiloHostService : IHostedService
     public ILogger<SiloHostService> logger;
     public ISiloHost Silo { get; }
 
-    private ISysUserRepository sysUserRepository;
     /// <summary>
     ///             
     /// </summary>
     /// <param name="logger"></param>
-    public SiloHostService(ILogger<SiloHostService> logger, ISysUserRepository sysUserRepository)
+    public SiloHostService(ILogger<SiloHostService> logger)
     {
-        this.sysUserRepository = sysUserRepository;
+     
         this.logger = logger;
         Silo = new SiloHostBuilder()
            .Configure<ClusterOptions>(option =>
@@ -51,6 +50,11 @@ public class SiloHostService : IHostedService
             })
            .ConfigureEndpoints(IPAddress.Parse(AppSetting.IPAddress.ipString), AppSetting.IPAddress.siloPort, AppSetting.IPAddress.gatewayPort)
               .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IUserGrains).Assembly).WithReferences())
+              .ConfigureServices(services =>
+              {
+                  services.AddInfrantructure(AppSetting._cfg);
+
+              })
              .UseDashboard(options =>
              {
                  options.Username = "admin";

@@ -37,6 +37,10 @@ public class GetUserByAccountQueriesHandler : IRequestHandler<GetUserByAccountQu
     public async Task<SysUser> Handle(GetUserByAccountQueries request, CancellationToken cancellationToken)
     {
         var userData = await clusterClient.GetGrain<IUserGrains>(request.Account).GetUserByAccount(request.Account);
+        if (userData!= null)
+        {
+          await clusterClient.GetGrain<IUserGrains>(userData.Id).GetUserByUserId(userData.Id);
+        }
         return userData;
     }
 }

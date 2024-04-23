@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans.Silo.Configuration;
 using Orleans.Silo.HostService;
-using Orleans.Infrastructure;
+
 await new HostBuilder()
     .ConfigureHostConfiguration(config =>
     {
@@ -13,8 +13,8 @@ await new HostBuilder()
     })
    .ConfigureServices((hostbuilderContext,services) =>
    {
-       services.AddInfrantructure(AppSetting._cfg);
        services.AddSingleton<SiloHostService>();
        services.AddSingleton<IHostedService>(_ => _.GetService<SiloHostService>());
        services.AddSingleton(_ => _.GetService<SiloHostService>().Silo);
+    
    }).RunConsoleAsync();

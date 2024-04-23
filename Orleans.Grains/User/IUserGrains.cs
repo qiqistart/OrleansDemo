@@ -10,4 +10,11 @@ public interface IUserGrains : IGrainWithStringKey
     /// <param name="Account"></param>
     /// <returns></returns>
     Task<SysUser> GetUserByAccount(string Account);
+
+    /// <summary>
+    /// 根据用户Id获取用户信息
+    /// </summary>
+    /// <param name="UserId"></param>
+    /// <returns></returns>
+    Task<SysUser> GetUserByUserId(string UserId);
 }

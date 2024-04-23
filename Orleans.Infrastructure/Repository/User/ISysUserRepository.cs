@@ -11,4 +11,11 @@ public interface ISysUserRepository : IRepository<SysUser, string>
     /// <param name="username"></param>
     /// <returns></returns>
     Task<SysUser> GetUserByAccount(string Account);
+
+    /// <summary>
+    ///     
+    /// </summary>
+    /// <param name="UserId"></param>
+    /// <returns></returns>
+    Task<SysUser> GetUserByUserId(string UserId);
 }

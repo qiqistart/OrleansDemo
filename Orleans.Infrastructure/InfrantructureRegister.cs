@@ -19,9 +19,10 @@ public static class InfrantructureRegister
     public static IServiceCollection AddInfrantructure(this IServiceCollection service, IConfiguration configuration)
     {
         var  connectionString = configuration.GetValue<string>("ConnectionString:DbConnectionString");
-        service.AddDbContext<OrleansDbContext>(opt =>
+        var serverVersion = new MySqlServerVersion(new Version(8, 0,36));
+       service.AddDbContext<OrleansDbContext>(opt =>
             {
-                opt.UseMySQL(connectionString);
+                opt.UseMySql(connectionString, serverVersion);
             }
         );
         service.AddScoped<ISysUserRepository, SysUserRepository>();

@@ -27,7 +27,7 @@ public class SysUser : BaseIdEntity<string>, IAggregateRoot
     /// <summary>
     /// 
     /// </summary>
-    public string Avatar { get; set; }
+    public string? Avatar { get; set; }
 
     /// <summary>
     /// 
