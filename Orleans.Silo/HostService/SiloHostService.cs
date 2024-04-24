@@ -26,6 +26,7 @@ public class SiloHostService : IHostedService
      
         this.logger = logger;
         Silo = new SiloHostBuilder()
+            
            .Configure<ClusterOptions>(option =>
            {
 
@@ -43,11 +44,14 @@ public class SiloHostService : IHostedService
                options.UseJsonFormat = AppSetting.GrainStorage.UseJsonFormat;
 
            })
+           .UseTransactions()
+           
            .UseAdoNetClustering(opt =>
             {
                 opt.Invariant = AppSetting.GrainStorage.Invariant;
                 opt.ConnectionString = AppSetting.GrainStorage.ConnectionString;
             })
+      
            .ConfigureEndpoints(IPAddress.Parse(AppSetting.IPAddress.ipString), AppSetting.IPAddress.siloPort, AppSetting.IPAddress.gatewayPort)
               .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IUserGrains).Assembly).WithReferences())
               .ConfigureServices(services =>

@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Orleans.OrleansRuntime" Version="3.7.1" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet" Version="3.7.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.6" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.7.1" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="OrleansDashboard" Version="3.6.2" />
   </ItemGroup>
