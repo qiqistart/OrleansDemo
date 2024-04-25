@@ -1,20 +1,8 @@
 ﻿using OrleansDemo.Common.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Orleans.Domain.Entity.UserAggregate;
-public class SysUser : BaseIdEntity<string>, IAggregateRoot
+public partial class SysUser : BaseIdEntity<string>, IAggregateRoot
 {
-    /// <summary>
-    ///             
-    /// </summary>
-    public SysUser()
-    {
-
-    }
     /// <summary>
     ///     
     /// </summary>

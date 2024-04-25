@@ -1,13 +1,14 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Grains.User;
 using Orleans.Hosting;
 using Orleans.Infrastructure;
-using Orleans.Infrastructure.Repository.User;
 using Orleans.Silo.Configuration;
 using System.Net;
+
 
 
 namespace Orleans.Silo.HostService;
@@ -57,7 +58,6 @@ public class SiloHostService : IHostedService
               .ConfigureServices(services =>
               {
                   services.AddInfrantructure(AppSetting._cfg);
-
               })
              .UseDashboard(options =>
              {

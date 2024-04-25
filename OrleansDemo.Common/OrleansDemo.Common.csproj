@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AdoNet" Version="3.7.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.7.1" />
+    <PackageReference Include="NewLife.Core" Version="10.9.2024.402" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
   </ItemGroup>
 

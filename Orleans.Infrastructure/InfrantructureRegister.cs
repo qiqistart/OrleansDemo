@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Infrastructure.Repository.User;
-
 namespace Orleans.Infrastructure;
+using OrleansDemo.Common.SnowflakeModule;
 
 /// <summary>
 /// 
@@ -18,6 +18,7 @@ public static class InfrantructureRegister
     /// <returns></returns>
     public static IServiceCollection AddInfrantructure(this IServiceCollection service, IConfiguration configuration)
     {
+        service.AddSnowflake();
         var  connectionString = configuration.GetValue<string>("ConnectionString:DbConnectionString");
         var serverVersion = new MySqlServerVersion(new Version(8, 0,36));
        service.AddDbContext<OrleansDbContext>(opt =>
