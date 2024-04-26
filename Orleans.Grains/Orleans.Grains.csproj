@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Orleans.Infrastructure\Orleans.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Orleans_CodeGenInputs Remove="User\UserConfigGrains.cs" />
+  </ItemGroup>
+
 </Project>

@@ -18,4 +18,11 @@ public interface ISysUserRepository : IRepository<SysUser, string>
     /// <param name="UserId"></param>
     /// <returns></returns>
     Task<SysUser> GetUserByUserId(string UserId);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    Task<bool>  AddUser(SysUser  user);
 }

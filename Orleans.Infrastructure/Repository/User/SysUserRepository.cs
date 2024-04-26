@@ -16,6 +16,18 @@ public class SysUserRepository : Repository<SysUser, string, OrleansDbContext>, 
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    public async Task<bool> AddUser(SysUser user)
+    {
+        await this.DbContext.AddAsync(user);
+        await this.DbContext.SaveChangesAsync();
+        return true;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="username"></param>
     /// <returns></returns>
     public async Task<SysUser> GetUserByAccount(string Account)

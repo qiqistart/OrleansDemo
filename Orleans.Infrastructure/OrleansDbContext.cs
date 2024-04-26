@@ -10,9 +10,14 @@ public class OrleansDbContext : DbContext
 
 
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public DbSet<SysUser> SysUser { get; set; }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    public DbSet<SysUserConfig> SysUserConfig { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

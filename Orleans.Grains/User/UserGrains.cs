@@ -49,5 +49,16 @@ public class UserGrains : Grain<UserGrainState>, IUserGrains
         }
         return userData;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    public async Task<bool> AddUser(SysUser user)
+    {
+        var addData = new SysUser(user.UserName, user.PassWord,user.Account,user.Avatar);
+        await sysUserRepository.AddUser(addData);
+        return true;
+    }
 }
 

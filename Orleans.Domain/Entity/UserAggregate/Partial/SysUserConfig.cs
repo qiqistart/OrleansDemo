@@ -25,12 +25,12 @@ public partial class SysUserConfig
     /// <param name="accountBalance"></param>
     /// <param name="sOpenOverdraftConsumption"></param>
     /// <param name="overdraftConsumptionBalance"></param>
-    public SysUserConfig(string userId, decimal accountBalance, bool sOpenOverdraftConsumption, decimal overdraftConsumptionBalance)
+    public SysUserConfig(string userId, decimal accountBalance, bool isOpenOverdraftConsumption, decimal overdraftConsumptionBalance)
     {
         Id = SnowflakeHelper.NewId();
         UserId = userId;
         AccountBalance = accountBalance;
-        IsOpenOverdraftConsumption = sOpenOverdraftConsumption;
+        IsOpenOverdraftConsumption = isOpenOverdraftConsumption;
         OverdraftConsumptionBalance = overdraftConsumptionBalance;
         Created = DateTime.Now;
     }

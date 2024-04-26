@@ -17,4 +17,12 @@ public interface IUserGrains : IGrainWithStringKey
     /// <param name="UserId"></param>
     /// <returns></returns>
     Task<SysUser> GetUserByUserId(string UserId);
+
+    /// <summary>
+    /// 新增用户
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    [Transaction(TransactionOption.Create)]
+    Task<bool> AddUser(SysUser user);
 }
