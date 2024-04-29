@@ -16,7 +16,7 @@ public static class SnowflakeHelper
     /// <returns></returns>
     public static string NewId()
     {
-        var serviceProvider = InternalApp.GetService<Snowflake>();
+        var serviceProvider =new Snowflake();
         return Convert.ToString(serviceProvider.NewId()); 
     }
 }

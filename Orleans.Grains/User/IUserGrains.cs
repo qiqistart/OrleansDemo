@@ -24,5 +24,5 @@ public interface IUserGrains : IGrainWithStringKey
     /// <param name="user"></param>
     /// <returns></returns>
     [Transaction(TransactionOption.Create)]
-    Task<bool> AddUser(SysUser user);
+    Task<SysUser> AddUser(SysUser user);
 }

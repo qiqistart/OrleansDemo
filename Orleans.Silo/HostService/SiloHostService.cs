@@ -7,6 +7,7 @@ using Orleans.Grains.User;
 using Orleans.Hosting;
 using Orleans.Infrastructure;
 using Orleans.Silo.Configuration;
+using OrleansDemo.Common.ServiceProviderModule;
 using System.Net;
 
 
@@ -46,7 +47,6 @@ public class SiloHostService : IHostedService
 
            })
            .UseTransactions()
-           
            .UseAdoNetClustering(opt =>
             {
                 opt.Invariant = AppSetting.GrainStorage.Invariant;
@@ -69,7 +69,6 @@ public class SiloHostService : IHostedService
                  options.CounterUpdateIntervalMs = 1000;
              })
            .Build();
-
     }
     public async Task StartAsync(CancellationToken cancellationToken)
     {

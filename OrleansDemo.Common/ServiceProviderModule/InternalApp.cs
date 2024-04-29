@@ -12,8 +12,13 @@ public static class InternalApp
     /// 根容器
     /// </summary>
     public static IServiceProvider RootServiceProvider { get; set; }
-
-
+    /// <summary>
+    /// 创建新的服务域
+    /// </summary>
+    public static void CreateNewScopeServiceProvider()
+    {
+        RootServiceProvider = RootServiceProvider.CreateAsyncScope().ServiceProvider;
+    }
     /// <summary>
     /// 获取请求生命周期的服务
     /// </summary>
@@ -32,5 +37,7 @@ public static class InternalApp
     /// <param name="type"></param>
     /// <returns></returns>
     public static object GetService(Type type) => RootServiceProvider.GetService(type);
+  
+  
 }
 

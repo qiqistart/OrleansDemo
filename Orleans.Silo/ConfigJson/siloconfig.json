@@ -1,9 +1,9 @@
 {
   "ConnectionString": {
-    "DbConnectionString": "Data Source=192.168.0.138;Database=Demo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;"
+    "DbConnectionString": "Data Source=192.168.0.149;Database=Demo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;"
   },
   "IPAddress": {
-    "ipString": "192.168.0.138",
+    "ipString": "192.168.0.149",
     "siloPort": 2020,
     "gatewayPort": 2021
   },
@@ -14,7 +14,7 @@
   "GrainStorage": {
     "Name": "OrleansStorage",
     "Invariant": "MySql.Data.MySqlClient",
-    "ConnectionString": "Data Source=192.168.0.138;Database=OrleansDemo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;",
+    "ConnectionString": "Data Source=192.168.0.149;Database=OrleansDemo;AllowLoadLocalInfile=true;User ID=root;Password=123456;allowPublicKeyRetrieval=true;pooling=true;CharSet=utf8;port=3306;sslmode=none;",
     "UseJsonFormat": true
   }
 

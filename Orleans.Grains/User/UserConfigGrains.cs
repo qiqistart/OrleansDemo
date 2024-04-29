@@ -2,6 +2,7 @@
 using Orleans.Domain.Entity.UserAggregate;
 using Orleans.Grains.User.GrainState;
 using Orleans.Infrastructure;
+using Orleans.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,11 @@ namespace Orleans.Grains.User;
 /// <summary>
 /// 
 /// </summary>
+[StorageProvider(ProviderName = "OrleansStorage")]
 public class UserConfigGrains : Grain<UserConfigState>, IUserConfigGrains
 {
+    private readonly IGrainFactory grainFactory;
+
     /// <summary>
     /// 
     /// </summary>
@@ -22,9 +26,10 @@ public class UserConfigGrains : Grain<UserConfigState>, IUserConfigGrains
     /// 
     /// </summary>
     /// <param name="orleansDb"></param>
-    public UserConfigGrains(OrleansDbContext orleansDb)
+    public UserConfigGrains(OrleansDbContext _orleansDb, IGrainFactory grainFactory)
     {
-        _orleansDb = _orleansDb;
+        this._orleansDb = _orleansDb;
+        this.grainFactory = grainFactory;
     }
 
     /// <summary>
@@ -49,7 +54,7 @@ public class UserConfigGrains : Grain<UserConfigState>, IUserConfigGrains
     /// <returns></returns>
     public async Task<bool> AddUserConfig(SysUserConfig userConfig)
     {
-        var addData =new SysUserConfig(userConfig.UserId, userConfig.AccountBalance, userConfig.IsOpenOverdraftConsumption, userConfig.OverdraftConsumptionBalance) ;
+        var addData =new SysUserConfig(userConfig.UserId, userConfig.AccountBalance, userConfig.IsOpenOverdraftConsumption, userConfig.OverdraftConsumptionBalance);
         await _orleansDb.SysUserConfig.AddAsync(addData);
         await _orleansDb.SaveChangesAsync();
         return true;    

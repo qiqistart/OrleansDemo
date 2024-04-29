@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Orleans.Application.Command.User;
 using Orleans.Application.Dto.RequestDto.User;
 using Orleans.Application.Queries.User;
 using OrleansDemo.Common.ApiResultModel;
@@ -147,6 +148,42 @@ public class UserController : ControllerBase
             throw new Exception("退出失败!");
         }
         return ApiResult.OkMsg("退出成功");
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="createUserDto"></param>
+    /// <returns></returns>
+    [HttpPost("CreateUser"),AllowAnonymous]
+    public async Task<ApiResult> CreateUserAsync([FromBody] CreateUserDto createUserDto)
+    {
+
+        if (createUserDto == null)
+        {
+            throw new Exception("参数丢失!");
+        }
+        if (!createUserDto.PassWord.Equals(createUserDto.SurePassWord))
+        {
+            throw new Exception("两次密码不一致!");
+        }
+        try
+        {
+            var adduUserOk = await _mediator.Send(new AddUserCommand()
+            {
+                Account = createUserDto.Account,
+                PassWord = MD5Helper.MD5Hash(createUserDto.PassWord),
+                Avatar = createUserDto.Avatar,
+                UserName = createUserDto.UserName
+            });
+            if (!adduUserOk)
+                throw new Exception("创建失败!");
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("创建失败!");
+        }
+        return ApiResult.OkMsg("创建成功!");
     }
     /// <summary>
     /// 

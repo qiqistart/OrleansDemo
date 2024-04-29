@@ -9,9 +9,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddIdentityServer()
    .AddDeveloperSigningCredential()
-   .AddInMemoryPersistedGrants()
+   //.AddInMemoryPersistedGrants()
+       .AddInMemoryApiResources(Config.GetApis())
      .AddInMemoryClients(Config.GetClients())
-    .AddInMemoryApiScopes(Config.GetApiScopes())
     .AddInMemoryApiScopes(Config.GetApiScopes())
     .AddExtensionGrantValidator<SystemUserGrantValidator>();
 builder.Services.AddAuthentication("Bearer")
